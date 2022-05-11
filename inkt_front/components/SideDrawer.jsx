@@ -24,7 +24,7 @@ const SideDrawer = ({ navLinks }) => {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: 250, marginTop: `auto`, marginBottom: `auto` }}
+      sx={{ width: 200, marginTop: `auto`, marginBottom: `auto` }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
