@@ -5,8 +5,22 @@ import Link from 'next/link'
 // import Header from '../components/Header'
 import MovieManager from '../components/homecomps/MovieManager'
 import PopularityManager from '../components/homecomps/PopularityManager'
+import { useState, useEffect } from "react";
 
-const Homepage = () => {
+export const getStaticProps = async () => {
+  const response = 
+  await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=15c37324adb27b6151b6ca8fb77deebf&language=en-US')
+  const data = await response.json()
+
+  return {
+    props: { movies: data.results }
+  }
+}
+
+
+
+const Homepage = ({ movies }) => {
+  
   return (
     <Container maxWidth="sm">
       <div>
@@ -16,8 +30,13 @@ const Homepage = () => {
           <link rel="icon" href="/favicon.ico" />
         </Head> */}
         {/* <Header></Header> */}
+        {/* {movies.map((movie) => {
+          return (
+            <div key={ movie.id }>{movie.title}</div>
+          )
+        })} */}
+        <MovieManager movies={movies}></MovieManager>
         <PopularityManager></PopularityManager>
-        <MovieManager></MovieManager>
       </div>
     </Container>
   );

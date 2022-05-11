@@ -1,5 +1,5 @@
-export default function EachMovie () {
+export default function EachMovie (props) {
     return (
-    <div>I am eachMovie!!</div>
+    <div>{ props.movie.title}</div>
     )
 }
