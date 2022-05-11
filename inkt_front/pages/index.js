@@ -2,9 +2,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
-import NavBar from '../componets/NavBar'
-import MovieManager from '../componets/homecomps/MovieManager'
-import PopularityManager from '../componets/homecomps/PopularityManager'
+import NavBar from '../components/NavBar'
+import MovieManager from '../components/homecomps/MovieManager'
+import PopularityManager from '../components/homecomps/PopularityManager'
 
 export default function Home() {
   return (
