@@ -6,7 +6,7 @@ export default function MovieManager (props) {
         {props.movies.map((movie) => (
             <EachMovie
               movie={movie}
-              key={movie._id}
+              key={movie.id}
             />
           ))}
     </div>
