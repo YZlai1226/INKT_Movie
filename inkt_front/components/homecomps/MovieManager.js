@@ -1,14 +1,15 @@
 import EachMovie from "./EachMovie"
 
-export default function MovieManager (props) {
-    return (
+
+export default function MovieManager(props) {
+  return (
     <div>
-        {props.movies.map((movie) => (
+      {props.movies.map((movie) => (
             <EachMovie
               movie={movie}
               key={movie.id}
             />
-          ))}
+      ))}
     </div>
-    )
+  )
 }

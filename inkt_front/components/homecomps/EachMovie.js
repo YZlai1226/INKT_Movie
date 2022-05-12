@@ -21,6 +21,9 @@ import Button from "@mui/material/Button";
 import MuiNextLink from "../MuiNextLink";
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
+import { IconButton } from "@mui/material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 
 export default function EachMovie (props) {
@@ -37,7 +40,7 @@ export default function EachMovie (props) {
                 {props.movie.release_date}
                 </Typography>
             </CardContent>
-            <CardActions>
+            <CardActions disableSpacing>
                 <MuiNextLink href="/movie" underline="none">
                   <Button variant="contained" size="medium">
                     {ctaText}
@@ -47,3 +50,4 @@ export default function EachMovie (props) {
         </Card>
     )
 }
+
