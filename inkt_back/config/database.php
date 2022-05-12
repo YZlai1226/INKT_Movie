@@ -2,15 +2,6 @@
 
 use Illuminate\Support\Str;
 
-
-$url = parse_url(getenv("DATABASE_URL"));
-
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
-
-
 return [
 
     
@@ -25,7 +16,7 @@ return [
     |
     */
 
-    'default' => 'pgsql',
+    'default' => 'mysql',
 
     /*
     |--------------------------------------------------------------------------
@@ -67,13 +58,13 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,
-            'engine' => null,
+            'engine' => 'InnoDB ROW_FORMAT=DYNAMIC',
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
         ],
 
-        'pgsql' => array(
+        /* 'pgsql' => array(
             'driver'   => 'pgsql',
             'host'     => $host,
             'database' => $database,
@@ -82,7 +73,7 @@ return [
             'charset'  => 'utf8',
             'prefix'   => '',
             'schema'   => 'public',
-        ),
+        ), */
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',

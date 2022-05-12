@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->char('title',);
+            $table->string('title',);
             $table->date('release_dt');
-            $table->char('synopsis', 500);
+            $table->text('synopsis', 500);
             $table->integer('genre_id');
-            $table->char('poster_path', 250);
+            $table->string('poster_path', 255);
             $table->unsignedBigInteger('director_id');
             /* $table->foreign('director_id')->references('id')->on('directors')->onDelete('cascade'); */
             $table->timestamps();
