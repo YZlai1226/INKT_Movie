@@ -1,9 +1,11 @@
 import AllMovies from "../../components/moviescomps/AllMovies";
 
+const url = 'http://localhost:8000';
+
 export const getStaticProps = async () => {
 
     const response =
-        await fetch('https://powerful-garden-78711.herokuapp.com/api/movies')
+        await fetch(url + '/api/movies')
     const data = await response.json()
     return {
         props: { movies: data }
@@ -13,7 +15,7 @@ export const getStaticProps = async () => {
 
 export default function adminmovie({ movies }, props) {
     const deleteMovie = async (movieId) => {
-        const response = await fetch(`https://powerful-garden-78711.herokuapp.com/api/movies/${movieId}`, {
+        const response = await fetch(`${url}/api/movies/${movieId}`, {
             method: "DELETE",
         }).then((response) => {
             if (response.status >= 400 && response.status < 600) {
@@ -28,7 +30,7 @@ export default function adminmovie({ movies }, props) {
 
     const addMovie = async () => {
         console.log("++++++++++");
-        const response = await fetch("https://powerful-garden-78711.herokuapp.com/api/movies/", {
+        const response = await fetch(url + "/api/movies", {
             method: "POST",
             // body: JSON.stringify({movies}),
             body: {name:""},
