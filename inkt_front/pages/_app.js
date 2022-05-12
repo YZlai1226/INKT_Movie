@@ -7,10 +7,12 @@ import createEmotionCache from '../styles/createEmotionCache';
 import "/styles/index.css";
 import "/styles/globals.css";
 import theme from '../styles/theme';
-
+import { ReactQueryDevtools } from "react-query/devtools";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
+const queryClient = new QueryClient();
 
 export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
@@ -25,8 +27,12 @@ export default function MyApp(props) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <Header/>
-        <Component {...pageProps} />
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+          <ReactQueryDevtools initialIsOpen={false}></ReactQueryDevtools>
+        </QueryClientProvider>
       </ThemeProvider>
     </CacheProvider>
   );
 }
+

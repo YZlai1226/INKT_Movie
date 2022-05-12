@@ -35,7 +35,7 @@ const Homepage = ({ movies }) => {
             <div key={ movie.id }>{movie.title}</div>
           )
         })} */}
-        <MovieManager movies={movies}></MovieManager>
+        <MovieManager movies={movies} key={movies.id}></MovieManager>
         <PopularityManager></PopularityManager>
       </div>
     </Container>
@@ -43,3 +43,6 @@ const Homepage = ({ movies }) => {
 };
 
 export default Homepage;
+
+
+
