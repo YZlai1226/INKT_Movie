@@ -1,6 +1,7 @@
 import Container from "@mui/material/Container";
 // import Head from 'next/head'
 // import Image from 'next/image'
+import 'semantic-ui-css/semantic.min.css'
 import Link from 'next/link'
 // import Header from '../components/Header'
 import MovieManager from '../components/homecomps/MovieManager'
