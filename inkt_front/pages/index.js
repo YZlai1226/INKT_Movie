@@ -1,4 +1,5 @@
 import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
 // import Head from 'next/head'
 // import Image from 'next/image'
 import Link from 'next/link'
@@ -23,7 +24,7 @@ export const getStaticProps = async () => {
 const Homepage = ({ movies }) => {
   
   return (
-    <Container maxWidth="md"  sx={{ my: 5 }}>
+    <Container maxWidth="md"  sx={{ my: 5 }} >
         <MovieManager movies={movies} key={movies.id}></MovieManager>
         <PopularityManager></PopularityManager>
     </Container>

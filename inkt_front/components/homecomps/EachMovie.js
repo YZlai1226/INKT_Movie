@@ -30,7 +30,7 @@ export default function EachMovie (props) {
     const image = "https://image.tmdb.org/t/p/original" + props.movie.poster_path
     const ctaText = "CHECK OUT"
     return (
-        <Card sx={{ maxWidth: 270 }}>
+        <Card sx={{ maxWidth: 270, height: 600 }}>
             <CardMedia sx={{ height: 350 }} image={image} title={props.movie.title} />
             <CardContent>
                 <Typography component="h5" variant="h5" gutterBottom>
@@ -41,11 +41,11 @@ export default function EachMovie (props) {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <MuiNextLink href="/movie" underline="none">
+                {/* <MuiNextLink href="/movie" underline="none">
                   <Button variant="contained" size="medium">
                     {ctaText}
                   </Button>
-                </MuiNextLink>
+                </MuiNextLink> */}
             </CardActions>
         </Card>
     )
