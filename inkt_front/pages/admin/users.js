@@ -1,5 +1,5 @@
 export default function adminusers() {
     return (
-        <div>I am in admin user page!!</div>
+        <div className="main-header">I am in admin user CRUD page!!</div>
     )
 }
