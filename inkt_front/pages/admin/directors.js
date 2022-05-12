@@ -1,9 +1,11 @@
 import AllDirectors from "../../components/directorcomps/AllDirectors";
 
+const url = 'http://localhost:8000';
+
 export const getStaticProps = async () => {
 
     const response =
-        await fetch('https://powerful-garden-78711.herokuapp.com/api/directors')
+        await fetch(url + '/api/directors')
     const data = await response.json()
     return {
         props: { directors: data }
@@ -13,7 +15,7 @@ export const getStaticProps = async () => {
 
 export default function admindirector({ directors }, props) {
     const deleteDirector = async (directorId) => {
-        const response = await fetch(`https://powerful-garden-78711.herokuapp.com/api/directors/${directorId}`, {
+        const response = await fetch(`${url}/api/directors/${directorId}`, {
             method: "DELETE",
         }).then((response) => {
             if (response.status >= 400 && response.status < 600) {
@@ -28,7 +30,7 @@ export default function admindirector({ directors }, props) {
 
     const addDirector = async () => {
         console.log("++++++++++");
-        const response = await fetch("https://powerful-garden-78711.herokuapp.com/api/directors/", {
+        const response = await fetch(url + "/api/directors", {
             method: "POST",
             // body: JSON.stringify({directors}),
             body: {name:"Tim"},
