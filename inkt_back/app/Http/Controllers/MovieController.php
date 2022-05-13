@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
@@ -14,7 +15,18 @@ class MovieController extends Controller
      */
     public function index()
     {
-        return response()->json(Movie::all());
+        $TMDBmovies = get_object_vars(json_decode(file_get_contents('https://api.themoviedb.org/3/discover/movie?api_key=15c37324adb27b6151b6ca8fb77deebf&language=en-US&sort_by=popularity.desc&year=2022')));
+        // var_dump('TMDBmovies is :', $TMDBmovies);
+        $ctv = $TMDBmovies['results'];
+        // var_dump('ctv is: ', $ctv);
+        $OURmovies = Movie::whereYear('release_dt', '=', date('2022'))
+        ->get();
+        $ctvOUR = json_decode($OURmovies);
+        // var_dump('ctvOUR is: ', $ctvOUR);
+
+        $allMovies = array_merge($ctv, $ctvOUR);
+
+        return response()->json($allMovies);
     }
 
     /**
@@ -28,9 +40,9 @@ class MovieController extends Controller
         $movie = new Movie;
 
         $movie->title = $request->title;
-        $movie->release_dt = $request->release_dt;
-        $movie->synopsis = $request->synopsis;
-        $movie->genre_id = $request->genre_id;
+        $movie->release_date = $request->release_dt;
+        $movie->overview = $request->synopsis;
+        $movie->genre_ids = $request->genre_id;
         $movie->poster_path = $request->poster_path;
         $movie->director_id = $request->director_id;
         
