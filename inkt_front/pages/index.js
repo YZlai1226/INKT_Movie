@@ -15,11 +15,12 @@ import { useAuth } from 'hooks/auth';
 
 export const getStaticProps = async () => {
   const response = 
-  await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=15c37324adb27b6151b6ca8fb77deebf&language=en-US')
+  // await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=15c37324adb27b6151b6ca8fb77deebf&language=en-US')
+  await fetch('http://127.0.0.1:8000/api/movies')
   const data = await response.json()
 
   return {
-    props: { movies: data.results }
+    props: { movies: data }
   }
 }
 

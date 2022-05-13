@@ -44,7 +44,7 @@ export default function EachMovie (props) {
                     <Typography variant="body2" color="text.secondary">
                         <StarRateIcon
                             sx={{
-                                color: "orange"
+                                color: "orange",
                             }}
                             fontSize="small"
                         />
