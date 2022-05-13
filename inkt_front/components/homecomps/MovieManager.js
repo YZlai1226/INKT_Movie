@@ -1,7 +1,16 @@
 import EachMovie from "./EachMovie"
 import Grid from "@mui/material/Grid";
 
+
+// function handleChange() {
+//   console.log("INSIDE handleChange()");
+// }
+
+
+
+
 export default function MovieManager(props) {
+
   return (
     <div>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
