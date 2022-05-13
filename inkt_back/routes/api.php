@@ -31,8 +31,7 @@ Route::get('/users', function() {
 //     return $request->user();
 // });
 Route::get('/genres', [GenreController::class, 'getGenres']);
-
-Route::apiResource('movies', MovieController::class);
+Route::apiResource('admin/movies', MovieController::class);
 Route::apiResource('grades', GradeController::class);
 Route::apiResource('directors', DirectorController::class);
 Route::apiResource('favorites', FavoriteController::class);

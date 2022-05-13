@@ -11,6 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import { CoPresent } from '@mui/icons-material';
 import { FormControlUnstyledContext } from '@mui/base';
+import { useAuth } from 'hooks/auth';
 
 export const getStaticProps = async () => {
   const response = 
@@ -137,8 +138,12 @@ const Homepage = ({ movies }) => {
     console.log(event.target.value)
   }
 
+/*   const { user } = useAuth({ middleware: 'guest' })
+ */
   return (
     <div>
+    {/* {user ?
+    <p>logged</p> : <p>not logged</p>} */}
       <InputLabel id="demo-simple-select-label">Number of Votes (just to test) (more than)</InputLabel>
       <Select
         labelId="demo-simple-select-label"

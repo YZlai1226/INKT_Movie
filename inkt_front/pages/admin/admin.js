@@ -1,5 +1,5 @@
 import Create from '../../components/moviescomps/AllMovies';
-import App from "../src/admin/App";
+// import App from "../src/admin/App";
 import director from "./directors";
 import SideBar from "../../components/SideBar"
 
