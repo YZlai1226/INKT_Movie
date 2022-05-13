@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DirectorController;
+use App\Http\Controllers\GenreController;
 use App\Models\User;
 
 /*
@@ -29,6 +30,7 @@ Route::get('/users', function() {
 // Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+Route::get('/genres', [GenreController::class, 'getGenres']);
 
 Route::apiResource('movies', MovieController::class);
 Route::apiResource('grades', GradeController::class);
