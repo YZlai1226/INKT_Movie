@@ -1,12 +1,9 @@
 import React from 'react';
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-// import Head from 'next/head'
-// import Image from 'next/image'
 import Link from 'next/link'
-// import Header from '../components/Header'
 import MovieManager from '../components/homecomps/MovieManager'
-import PopularityManager from '../components/homecomps/PopularityManager'
+// import PopularityManager from '../components/homecomps/PopularityManager'
 import { useState, useEffect } from "react";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
@@ -17,11 +14,12 @@ import { FormControlUnstyledContext } from '@mui/base';
 
 export const getStaticProps = async () => {
   const response = 
-  await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=15c37324adb27b6151b6ca8fb77deebf&language=en-US')
+  // await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=15c37324adb27b6151b6ca8fb77deebf&language=en-US')
+  await fetch('http://127.0.0.1:8000/api/movies')
   const data = await response.json()
 
   return {
-    props: { movies: data.results }
+    props: { movies: data }
   }
 }
 
@@ -72,7 +70,7 @@ const Homepage = ({ movies }) => {
     const filters = {
       vote_average: movieScore,
       vote_count: voteCount,
-      original_title: movieTitle
+      title: movieTitle
     }
     // voteCount = parseInt(voteCount, 10);
     // console.log("voteCount is !!!!!!!!!: ")
@@ -85,7 +83,7 @@ const Homepage = ({ movies }) => {
         console.log(`We have: ${obj[filter]} and ${filters[filter]}`);
         if (filters[filter] === undefined)
           continue;
-        if (filter === 'original_title') {
+        if (filter === 'title') {
           if (!obj[filter].toLowerCase().includes(filters[filter].toLowerCase())) {
             // console.log("1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ret false")
             return false;
@@ -174,7 +172,7 @@ const Homepage = ({ movies }) => {
       />
       <Container maxWidth="md" sx={{ my: 5 }} >
           <MovieManager movies={filteredMovies} key={movies.id}></MovieManager>
-          <PopularityManager></PopularityManager>
+          {/* <PopularityManager></PopularityManager> */}
       </Container>
     </div>
   );
