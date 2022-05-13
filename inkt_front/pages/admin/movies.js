@@ -54,7 +54,7 @@ export default function adminmovie({ movies }, props) {
     } else {
         return (
             <div className="main">
-                <button onClick={() => { addMovie() }} >ADD NEW</button>
+                <button onClick={() => { addMovie() }} >  <img src="https://freeiconshop.com/wp-content/uploads/edd/plus-flat.png" height={25} width={25} /></button>
                 <AllMovies movies={movies} deleteMovie={deleteMovie} key={movies.id} ></AllMovies>
                 {/* <div className="main-header">I am in admin movie CRUD page!!</div> */}
             </div>
