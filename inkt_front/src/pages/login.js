@@ -1,13 +1,13 @@
-import ApplicationLogo from 'src/components/ApplicationLogo'
-import AuthCard from 'src/components/AuthCard'
-import AuthSessionStatus from 'src/components/AuthSessionStatus'
-import AuthValidationErrors from 'src/components/AuthValidationErrors'
-import Button from 'src/components/Button'
-import GuestLayout from 'src/components/Layouts/GuestLayout'
-import Input from 'src/components/Input'
-import Label from 'src/components/Label'
+import ApplicationLogo from '@/components/ApplicationLogo'
+import AuthCard from '@/components/AuthCard'
+import AuthSessionStatus from '@/components/AuthSessionStatus'
+import AuthValidationErrors from '@/components/AuthValidationErrors'
+import Button from '@/components/Button'
+import GuestLayout from '@/components/Layouts/GuestLayout'
+import Input from '@/components/Input'
+import Label from '@/components/Label'
 import Link from 'next/link'
-import { useAuth } from '/hooks/auth'
+import { useAuth } from '@/hooks/auth'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
@@ -41,14 +41,13 @@ const Login = () => {
     return (
         <GuestLayout>
             <AuthCard
-                // logo={
-                //     <Link href="/">
-                //         <a>
-                //             <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
-                //         </a>
-                //     </Link>
-                // }
-                >
+                logo={
+                    <Link href="/">
+                        <a>
+                            <ApplicationLogo className="w-20 h-20 fill-current text-gray-500" />
+                        </a>
+                    </Link>
+                }>
 
                 {/* Session Status */}
                 <AuthSessionStatus className="mb-4" status={status} />
