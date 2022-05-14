@@ -14,6 +14,7 @@ import { CoPresent } from '@mui/icons-material';
 import { FormControlUnstyledContext } from '@mui/base';
 import Autocomplete from '@mui/material/Autocomplete';
 import { useAuth } from 'hooks/auth';
+import axios from 'axios';
 
 export const getStaticProps = async () => {
   const responseMovies = 

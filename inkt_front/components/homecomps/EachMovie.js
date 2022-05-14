@@ -26,10 +26,24 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import StarRateIcon from '@mui/icons-material/StarRate';
 
+import axios from "lib/axios";
+import { useAuth } from "hooks/auth";
+
 
 export default function EachMovie (props) {
     const image = "https://image.tmdb.org/t/p/original" + props.movie.poster_path
     const ctaText = "CHECK OUT"
+    const { user } = useAuth()
+
+
+    async function addToFavorites(movie_id) {
+        const res = await axios.post('http://localhost:8000/api/admin/favorites', {
+          "user_id": user?.id,
+          "movie_id" : movie_id
+        });
+        console.log(res);
+      }
+
     return (
         <MuiNextLink href="/movie" underline="none">
             <Card sx={{ maxWidth: 270, height: 550 }}>
@@ -53,6 +67,9 @@ export default function EachMovie (props) {
                     <Typography variant="body2" color="text.secondary">
                     {props.movie.genre_ids}
                     </Typography>
+                    <button onClick={() => addToFavorites(props.movie.id)}>
+                        Fav
+                    </button>
                 </CardContent>
                 {/* <CardActions disableSpacing>
                     <MuiNextLink href="/movie" underline="none">

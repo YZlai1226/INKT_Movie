@@ -19,8 +19,8 @@ export default function Profile() {
             .then(() => setLoading(false))
     }, []);
 
-    const favorites = userProfile.favorites.map((movie) => <li key={movie?.id}>{movie?.name}</li>)
-
+    const favorites = userProfile?.favorites?.map((movie) => <li key={movie?.id}>{movie?.title}</li>)
+    console.log(userProfile);
     return (
         <div>
             <Container>
