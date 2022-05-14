@@ -27,11 +27,17 @@ class MovieController extends Controller
         $ctv2019 = $TMDBmovies2019['results'];
         $ctv2018 = $TMDBmovies2018['results'];
         // var_dump('ctv is: ', $ctv);
-        $OURmovies = Movie::all();
-        $ctvOUR = json_decode($OURmovies);
+        if (Movie::all() !== null) {
+
+            $OURmovies = Movie::all();
+            $ctvOUR = json_decode($OURmovies);
+            $allMovies = array_merge($ctv2022, $ctv2021, $ctv2020, $ctv2019, $ctv2018, $ctvOUR);
+        } else {
+            $allMovies = array_merge($ctv2022, $ctv2021, $ctv2020, $ctv2019, $ctv2018);
+
+        }
         // var_dump('ctvOUR is: ', $ctvOUR);
 
-        $allMovies = array_merge($ctv2022, $ctv2021, $ctv2020, $ctv2019, $ctv2018, $ctvOUR);
 
         return response()->json($allMovies);
     }
