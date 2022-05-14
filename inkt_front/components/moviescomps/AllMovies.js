@@ -29,7 +29,7 @@ export default function adminmovies(props) {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                {movie.original_title}
+                                {movie.title}
                             </TableCell>
                             <TableCell component="th" scope="row">
                                 <button> <img src="https://freeiconshop.com/wp-content/uploads/edd/edit-flat.png" height={25} width={25} /> </button>

@@ -2,10 +2,21 @@ import * as React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 import createEmotionCache from '../styles/createEmotionCache';
+import { useEffect } from 'react';
 
 import theme from '../styles/theme';
 
 export default class MyDocument extends Document {
+
+  useEffect = () => {
+    const csrfProtection = csrf({
+      cookie: true
+    });
+    app.use(csrfProtection);
+    app.get('/getCSRFToken', (req, res) => {
+      res.json({ CSRFToken: req.CSRFToken() });
+    }), []};
+
   render() {
     return (
       <Html lang="en">

@@ -10,6 +10,7 @@ import SideDrawer from "./SideDrawer";
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import { useAuth } from "hooks/auth";
 import Link from 'next/link';
+import { Button } from "@mui/material";
 
 const Offset = styled("div")(({ theme }) => theme.mixins.toolbar);
 
@@ -51,7 +52,7 @@ const Header = () => {
                         {user ?
                             <>  <NavBar navLinks={navLinksConnected} />
                                 <SideDrawer navLinks={navLinksConnected} />
-                                <button onClick={logout}>Log me out</button>
+                                <Button color="inherit" onClick={logout}>Log me out</Button>
                             </>
                             :
                             <>
