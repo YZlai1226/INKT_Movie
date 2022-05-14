@@ -32,7 +32,7 @@ export default function EachMovie (props) {
     const ctaText = "CHECK OUT"
     return (
         <MuiNextLink href="/movie" underline="none">
-            <Card sx={{ maxWidth: 270, height: 530 }}>
+            <Card sx={{ maxWidth: 270, height: 550 }}>
                 <CardMedia sx={{ height: 350 }} image={image} title={props.movie.title} />
                 <CardContent>
                     <Typography component="h5" variant="h5" gutterBottom>
@@ -49,6 +49,9 @@ export default function EachMovie (props) {
                             fontSize="small"
                         />
                     <span>{props.movie.vote_average}</span>
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                    {props.movie.genre_ids}
                     </Typography>
                 </CardContent>
                 {/* <CardActions disableSpacing>
