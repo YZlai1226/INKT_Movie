@@ -12,7 +12,11 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import { CoPresent } from '@mui/icons-material';
 import { FormControlUnstyledContext } from '@mui/base';
+<<<<<<< HEAD
 import Autocomplete from '@mui/material/Autocomplete';
+=======
+import { useAuth } from 'hooks/auth';
+>>>>>>> b9881a19f110fa5d26f64c81af227230ba8281c8
 
 export const getStaticProps = async () => {
   const responseMovies = 

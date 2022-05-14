@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\AdminMovieController;
 use App\Http\Controllers\GradeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,8 +33,9 @@ Route::get('/users', function() {
 // });
 Route::get('/genres', [GenreController::class, 'getGenres']);
 
+Route::apiResource('admin/movies', AdminMovieController::class);
 Route::apiResource('movies', MovieController::class);
-Route::apiResource('grades', GradeController::class);
-Route::apiResource('directors', DirectorController::class);
-Route::apiResource('favorites', FavoriteController::class);
-Route::apiResource('comments', CommentController::class);
+Route::apiResource('admin/grades', GradeController::class);
+Route::apiResource('admin/directors', DirectorController::class);
+Route::apiResource('admin/favorites', FavoriteController::class);
+Route::apiResource('admin/comments', CommentController::class);
