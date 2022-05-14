@@ -64,9 +64,21 @@ class MovieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
-        return response()->json($movie, 201);
+        // $movie->id
+        if ($id<62) {
+            // print('id<62');
+            $movie = Movie::find($id);
+            // var_dump('movie is', $movie);
+            return response()->json($movie, 201);
+        }
+        
+            // print('id>62');
+        $TMDBmovie = get_object_vars(json_decode(file_get_contents('https://api.themoviedb.org/3/movie/'. $id . '?api_key=15c37324adb27b6151b6ca8fb77deebf&language=en-US')));
+            // var_dump($TMDBmovie);
+            return response()->json($TMDBmovie, 201);
+        
     }
 
     /**
