@@ -30,8 +30,8 @@ async function deleteDirector(directorId) {
     console.log("res:", res);
 };
 
-  function updateDirector() {
-  axios.put(`http://localhost:8000/api/admin/directors/${id}`, {
+async function updateDirector() {
+   res = await axios.put(`http://localhost:8000/api/admin/directors/${id}`, {
       name: 'Tom'
   })
       .then(response => {
@@ -44,11 +44,8 @@ async function deleteDirector(directorId) {
 
 async function createDirector() {
     const csrf = await axios.get('http://localhost:8000/sanctum/csrf-cookie');
-    console.log('csrf:', csrf);
-    const res = await axios.post("http://localhost:8000/api/admin/directors/", {
-        name: "paul",
-    })
-    console.log('res:',res);
+    const res = await axios.post("http://localhost:8000/api/admin/directors/", {name: "Paulie",});
+    console.log(res);
 }
 
 export default directors
