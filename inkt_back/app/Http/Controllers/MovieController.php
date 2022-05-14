@@ -67,7 +67,14 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
-        return response()->json($movie, 201);
+        // $movie->id
+        if ($movie['id']<62) {
+            return response()->json($movie, 201);
+        }
+        else {
+            $TMDBmovies2018 = get_object_vars(json_decode(file_get_contents('https://api.themoviedb.org/3/discover/movie?api_key=15c37324adb27b6151b6ca8fb77deebf&language=en-US&sort_by=popularity.desc&year=2018')));
+
+        }
     }
 
     /**
