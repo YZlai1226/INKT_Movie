@@ -9,7 +9,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\GenreController;
-use App\Models\User;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +39,4 @@ Route::apiResource('admin/grades', GradeController::class);
 Route::apiResource('admin/directors', DirectorController::class);
 Route::apiResource('admin/favorites', FavoriteController::class);
 Route::apiResource('admin/comments', CommentController::class);
+Route::apiResource('admin/users', UserController::class);

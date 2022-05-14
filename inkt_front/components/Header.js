@@ -27,8 +27,6 @@ const Header = () => {
     const { user } = useAuth({ middleware: 'guest' })
     const { logout } = useAuth()
 
-
-
     return (
         <>
             <AppBar position="fixed">
@@ -51,8 +49,7 @@ const Header = () => {
                             </IconButton>
                         </Link>
                         {user ?
-                            <>  {user?.name}
-                                <NavBar navLinks={navLinksConnected} />
+                            <>  <NavBar navLinks={navLinksConnected} />
                                 <SideDrawer navLinks={navLinksConnected} />
                                 <button onClick={logout}>Log me out</button>
                             </>
