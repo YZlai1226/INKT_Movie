@@ -33,7 +33,6 @@ Route::get('/users', function() {
 // });
 Route::get('/genres', [GenreController::class, 'getGenres']);
 
-
 Route::apiResource('admin/movies', AdminMovieController::class);
 Route::apiResource('movies', MovieController::class);
 Route::apiResource('admin/grades', GradeController::class);

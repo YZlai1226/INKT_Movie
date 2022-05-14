@@ -27,8 +27,7 @@ class MovieController extends Controller
         $ctv2019 = $TMDBmovies2019['results'];
         $ctv2018 = $TMDBmovies2018['results'];
         // var_dump('ctv is: ', $ctv);
-        $OURmovies = Movie::all()
-        ->get();
+        $OURmovies = Movie::all();
         $ctvOUR = json_decode($OURmovies);
         // var_dump('ctvOUR is: ', $ctvOUR);
 
@@ -48,9 +47,9 @@ class MovieController extends Controller
         $movie = new Movie;
 
         $movie->title = $request->title;
-        $movie->release_date = $request->release_dt;
-        $movie->overview = $request->synopsis;
-        $movie->genre_ids = $request->genre_id;
+        $movie->release_date = $request->release_date;
+        $movie->overview = $request->overview;
+        $movie->genre_ids = $request->genre_ids;
         $movie->poster_path = $request->poster_path;
         $movie->director_id = $request->director_id;
         

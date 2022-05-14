@@ -5,34 +5,41 @@ import Link from 'next/link'
 import MovieManager from '../components/homecomps/MovieManager'
 // import PopularityManager from '../components/homecomps/PopularityManager'
 import { useState, useEffect } from "react";
+import Filters from '../components/homecomps/Filters'
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import { CoPresent } from '@mui/icons-material';
 import { FormControlUnstyledContext } from '@mui/base';
+import Autocomplete from '@mui/material/Autocomplete';
+import { useAuth } from 'hooks/auth';
 
 export const getStaticProps = async () => {
-  const response = 
+  const responseMovies = 
   // await fetch('https://api.themoviedb.org/3/movie/now_playing?api_key=15c37324adb27b6151b6ca8fb77deebf&language=en-US')
   await fetch('http://127.0.0.1:8000/api/movies')
-  const data = await response.json()
+  const data = await responseMovies.json()
+
+  const responseGenres =
+  await fetch('http://127.0.0.1:8000/api/genres')
+  const GenresData = await responseGenres.json()
 
   return {
-    props: { movies: data }
+    props: { movies: data, genres: GenresData.genres }
   }
 }
 
 
-
-
-const Homepage = ({ movies }) => {
-  // movies = edit_movies_please_delete_me(movies)
+const Homepage = ({ movies, genres }) => {
 
   const [voteCount, setVoteCount] = React.useState();
   const [movieScore, setMovieScore] = React.useState();
   const [movieTitle, setMovieTitle] = React.useState();
+  const [movieGenre, setMovieGenre] = React.useState();
   const [filteredMovies, setFilteredMovies] = React.useState(movies);
+
+
   useEffect(() => {
     filteredMovies = filter_movies(movies)
     setFilteredMovies(filteredMovies);
@@ -45,131 +52,105 @@ const Homepage = ({ movies }) => {
     filteredMovies = filter_movies(movies)
     setFilteredMovies(filteredMovies);
   }, [movieTitle]);
+  useEffect(() => {
+    filteredMovies = filter_movies(movies)
+    setFilteredMovies(filteredMovies);
+  }, [movieGenre]);
 
-  // movies = filter_movies(movies, '2010');
-
-  // function edit_movies_please_delete_me(movies){
-  //   console.log('1***********************')
-  //   for (var movie in movies) {
-  //     console.log(typeof(movies[movie]))
-  //     console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZzz")
-  //     console.log(parseInt(movies[movie]['release_date'].split('-')[0], 10))
-  //     movies[movie]['release_dates'] = parseInt(movies[movie]['release_date'].split('-')[0], 10)
-  //     console.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZzz")
-  //     // movies[movie]['release_date'] = parseInt(movies[movie]['release_date'][0])
-  //     console.log(movies[movie])
-  //   }
-  //   console.log('2***********************')
-  //   return (movies)
-  // }
 
   function filter_movies(movies) {
-    console.log(`********* voteCount: ${voteCount}`)
-    console.log(`********* movieScore: ${movieScore}`)
-    console.log(`********* movieTitle: ${movieTitle}`)
     const filters = {
       vote_average: movieScore,
       vote_count: voteCount,
-      title: movieTitle
+      title: movieTitle,
+      genre_ids: movieGenre
     }
-    // voteCount = parseInt(voteCount, 10);
-    // console.log("voteCount is !!!!!!!!!: ")
-    // console.log(voteCount);
-    // console.log("THE MOVIES ARE RIGHT HERE BROOO:");
-    // console.log(movies);
     var result = movies.filter(obj => {
+      console.log(`vote_average: ${movieScore}`)
+      console.log(`vote_count: ${voteCount}`)
+      console.log(`title: ${movieTitle}`)
+      console.log(`genre_ids: ${movieGenre}`)
       for (var filter in filters) {
-        console.log(`Treating filter ${filter} with value: ${filters[filter]}`)
-        console.log(`We have: ${obj[filter]} and ${filters[filter]}`);
+        console.log(`Comparing ${obj[filter]} with ${filters[filter]}`)
         if (filters[filter] === undefined)
           continue;
         if (filter === 'title') {
           if (!obj[filter].toLowerCase().includes(filters[filter].toLowerCase())) {
-            // console.log("1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ret false")
             return false;
           }
         }
-        else
-          if (obj[filter] < filters[filter]) {
-            // console.log(`obj[filter]: ${obj[filter]}`)
-            // console.log(`filters[filter]: ${filters[filter]}`)
-            // console.log("2!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ret false")
+        else if (filter === 'genre_ids') {
+          console.log(`obj[filter]: ${obj[filter]} and ${typeof(obj[filter])}`)
+          if (!obj[filter].includes(filters[filter])) {
             return false;
           }
-          // console.log(typeof(obj[filter]))
-          // console.log(typeof(filters[filter]))
-          // console.log("ret false....")
-          // return false;
+        }
+        else if (obj[filter] < filters[filter]) {
+          return false;
+        }
       }
-      // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! RETURN TRUE")
       return true;
-        // if (filters[filter] === undefined)
-        //   console.log(`Value of filter ${filter} is undefined. Skipping..`)
-        // if (filter === 'voteCount')
-        //   return parseInt(obj.release_date.split('-')[0], 10) >= filters[filter]
-        // if (filter === 'movieScore')
-        //   return obj.vote_average >= filters[filter]
-        // }
-
-        // if (isNan(voteCount))
-      //   return parseInt(obj.release_date.split('-')[0], 10) >= voteCount
-      // return obj.release_date.startsWith(voteCount)
     });
-    // console.log(`Showing movies where release_date > ${voteCount}-xx-xx`);
-    console.log(result);
+    // console.log(result);
     return result;
-    // return movies;
   }
 
   const handleChangeVoteCount = event => {
     console.log('INSIDE handleChangeVoteCount()');
-    setVoteCount(event.target.value);
+    if (event) {
+      setVoteCount(event.target.value);
+      }
   };
 
-  const handleChangeScore = event => {
+  const handleChangeScore = event => {  
     console.log('INSIDE handleChangeScore()');
-    setMovieScore(event.target.value);
-    console.log(event.target.value)
+    if (event) {
+      setMovieScore(event.target.value);
+      console.log(event.target.value)
+    }
   }
 
   const handleChangeMovieTitle = event => {
     console.log('INSIDE handleChangeTitle()');
-    setMovieTitle(event.target.value);
-    console.log(event.target.value)
+    if (event) {
+      setMovieTitle(event.target.value);
+      console.log(event.target.value)
+    }
   }
+
+  // const handleChangeMovieGenre = (event) => {
+  //   console.log('INSIDE handleChangeMovieGenre()');
+  //   if (event) {
+  //   setMovieGenre(event.target.value);
+  //   console.log('=====================', event.target.value)
+  // }
+  // }
+
+  const handleChangeMovieGenre = event => {
+    console.log('INSIDE handleChangeMovieGenre()');
+    if (event.target.innerHTML) {
+      const selectedGenre = event.target.innerHTML
+      const genreId = parseInt(genres.filter(element => element['name'] === selectedGenre)[0]['id'])
+      setMovieGenre(genreId);
+    }
+  }
+
 
   return (
     <div>
-      <InputLabel id="demo-simple-select-label">Number of Votes (just to test) (more than)</InputLabel>
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={voteCount}
-        onChange={handleChangeVoteCount}
+      <Filters
+      movies={movies}
+      genres={genres}
+      voteCount={voteCount}
+      movieScore={movieScore}
+      movieTitle={movieTitle}
+      movieGenre={movieGenre}
+      handleChangeVoteCount={handleChangeVoteCount}
+      handleChangeScore={handleChangeScore}
+      handleChangeMovieTitle={handleChangeMovieTitle}
+      handleChangeMovieGenre={handleChangeMovieGenre}
       >
-        <MenuItem value={9}>9</MenuItem>
-        <MenuItem value={7}>7</MenuItem>
-        <MenuItem value={5}>5</MenuItem>
-        <MenuItem value={1}>1</MenuItem>
-      </Select>
-      <InputLabel id="demo-simple-select-label">Score (more than)</InputLabel>
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={movieScore}
-        onChange={handleChangeScore}
-      >
-        <MenuItem value={9}>9</MenuItem>
-        <MenuItem value={7}>7</MenuItem>
-        <MenuItem value={5}>5</MenuItem>
-        <MenuItem value={1}>1</MenuItem>
-      </Select>
-      <br/>
-      <TextField
-        id="outlined-name"
-        label="Movie Title"
-        onChange={handleChangeMovieTitle}
-      />
+      </Filters>
       <Container maxWidth="md" sx={{ my: 5 }} >
           <MovieManager movies={filteredMovies} key={movies.id}></MovieManager>
           {/* <PopularityManager></PopularityManager> */}
