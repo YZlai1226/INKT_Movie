@@ -2,6 +2,12 @@ import AllDirectors from "../../components/directorcomps/AllDirectors";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const getCSRFToken = async () => {
+    const response = await axios.get('/getCSRFToken');
+    axios.defaults.headers.post['X-CSRF-Token'] = response.data.CSRFToken;
+    axios.defaults.headers.delete['X-CSRF-Token'] = response.data.CSRFToken; 
+    axios.defaults.headers.put['X-CSRF-Token'] = response.data.CSRFToken;
+};
 
 function directors(props) {
 console.log(props);
@@ -44,7 +50,7 @@ async function updateDirector() {
 
 async function createDirector() {
     const csrf = await axios.get('http://localhost:8000/sanctum/csrf-cookie');
-    const res = await axios.post("http://localhost:8000/api/admin/directors/", {name: "Paulie",});
+    const res = await axios.post("http://localhost:8000/api/admin/directors/", {name: "James Cameron",});
     console.log(res);
 }
 

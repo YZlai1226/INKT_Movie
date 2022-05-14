@@ -24,7 +24,7 @@ return new class extends Migration
 
         Schema::table('favorites', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->change();
-            $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade')->change();
+            /* $table->foreign('movie_id')->references('id')->on('movies')->onDelete('cascade')->change(); */
         });
 
         Schema::table('comments', function (Blueprint $table) {

@@ -5,7 +5,7 @@ const url = 'http://localhost:8000';
 export const getStaticProps = async () => {
 
     const response =
-        await fetch(url + '/api/movies')
+        await fetch(url + '/api/admin/movies')
     const data = await response.json()
     return {
         props: { movies: data }
@@ -15,7 +15,7 @@ export const getStaticProps = async () => {
 
 export default function adminmovie({ movies }, props) {
     const deleteMovie = async (movieId) => {
-        const response = await fetch(`${url}/api/movies/${movieId}`, {
+        const response = await fetch(`${url}/api/admin/movies/${movieId}`, {
             method: "DELETE",
         }).then((response) => {
             if (response.status >= 400 && response.status < 600) {
@@ -30,12 +30,12 @@ export default function adminmovie({ movies }, props) {
 
     const addMovie = async () => {
         console.log("++++++++++");
-        const response = await fetch(url + "/api/movies", {
+        const response = await fetch(url + "/api/admin/movies", {
             method: "POST",
             // body: JSON.stringify({movies}),
-            body: {name:""},
+            body: { name: "" },
             headers: {
-                'Content-Type' : 'application/json',
+                'Content-Type': 'application/json',
             },
         }).then((response) => {
             if (response.status >= 400 && response.status < 600) {

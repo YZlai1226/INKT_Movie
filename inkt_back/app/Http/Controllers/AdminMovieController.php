@@ -15,8 +15,7 @@ class AdminMovieController extends Controller
      */
     public function index()
     {
-        $OURmovies = Movie::all()
-        ->get();
+        $OURmovies = Movie::all();
         $ctvOUR = json_decode($OURmovies);
 
         return response()->json($OURmovies);
