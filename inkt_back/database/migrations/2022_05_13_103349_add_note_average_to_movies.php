@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('movies', function (Blueprint $table) {
-            $table->integer('note_average');
+            $table->integer('note_average')->nullable();
         });
     }
 
