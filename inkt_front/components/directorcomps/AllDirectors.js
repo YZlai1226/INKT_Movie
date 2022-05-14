@@ -21,7 +21,7 @@ export default function admindirector(props) {
                 </TableHead>
                 <TableBody>
                     {console.log(props.directors)}
-                    {props.directors.map((director) => (
+                    {props.directors.data.map((director) => (
                         <TableRow
                             key={director.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

@@ -36,8 +36,8 @@ const deleteDirector = async (directorId) => {
       });
 }
 
-  function updateDirector() {
-  axios.put(`http://localhost:8000/api/admin/directors/${id}`, {
+async function updateDirector() {
+   res = await axios.put(`http://localhost:8000/api/admin/directors/${id}`, {
       name: 'Tom'
   })
       .then(response => {
@@ -47,14 +47,10 @@ const deleteDirector = async (directorId) => {
           console.log(error);
       });
 }
-
-  function createDirector() {
-  axios.post("http://localhost:8000/api/admin/directors/", {
-      name: "",
-  })
-      .then((response) => {
-          console.log(response);
-      });
+async function createDirector() {
+    const csrf = await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+    const res = await axios.post("http://localhost:8000/api/admin/directors/", {name: "Paulie",});
+    console.log(res);
 }
 
 
