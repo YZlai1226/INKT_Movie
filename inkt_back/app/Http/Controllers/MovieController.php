@@ -48,9 +48,9 @@ class MovieController extends Controller
         $movie = new Movie;
 
         $movie->title = $request->title;
-        $movie->release_date = $request->release_dt;
-        $movie->overview = $request->synopsis;
-        $movie->genre_ids = $request->genre_id;
+        $movie->release_date = $request->release_date;
+        $movie->overview = $request->overview;
+        $movie->genre_ids = $request->genre_ids;
         $movie->poster_path = $request->poster_path;
         $movie->director_id = $request->director_id;
         

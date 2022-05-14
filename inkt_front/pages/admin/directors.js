@@ -23,18 +23,12 @@ export async function getStaticProps() {
   }
 }
 
-const deleteDirector = async (directorId) => {
-  const csrf = await axios.get('http://localhost:8000/sanctum/csrf-cookie')
-              console.log("DIRECTORID", directorId);
-  const del = axios.delete("http://localhost:8000/api/admin/directors/" + directorId)
-      .then(function (response) {
-              console.log("DEL", del);
-              console.log("DELETE RESPONSE", response);
-      })
-      .catch(error => {
-              console.log(error);
-      });
-}
+async function deleteDirector(directorId) {
+    const csrf = await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+    console.log('csrf:', csrf);
+    const res = await axios.delete("http://localhost:8000/api/admin/directors/" + directorId);
+    console.log("res:", res);
+};
 
   function updateDirector() {
   axios.put(`http://localhost:8000/api/admin/directors/${id}`, {
@@ -48,16 +42,14 @@ const deleteDirector = async (directorId) => {
       });
 }
 
-  function createDirector() {
-  axios.post("http://localhost:8000/api/admin/directors/", {
-      name: "",
-  })
-      .then((response) => {
-          console.log(response);
-      });
+async function createDirector() {
+    const csrf = await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+    console.log('csrf:', csrf);
+    const res = await axios.post("http://localhost:8000/api/admin/directors/", {
+        name: "paul",
+    })
+    console.log('res:',res);
 }
-
-
 
 export default directors
 
